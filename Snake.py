@@ -8,6 +8,9 @@ class Snake:
         """
     def __init__(self, x_value, y_value, direction):
 
+        self.x_coord = x_value
+        self.y_coord = y_value
+        self.direction = direction
 
     def get_position(self):
         """
@@ -17,6 +20,7 @@ class Snake:
         >>> snake.get_position()
         (50, 75)
         """
+        return self.x_coord, self.y_coord
 
     def move(self, key_pressed):
         """
@@ -40,7 +44,49 @@ class Snake:
         >>> snake.y_coord
         77
         """
+        if self.direction == 'u':
 
+            if key_pressed == 'r':
+                self.direction = 'r'
+                self.x_coord += 1
+            elif key_pressed == 'l':
+                self.direction = 'l'
+                self.x_coord -= 1
+            else:
+                self.y_coord -= 1
+
+        elif self.direction == 'd':
+
+            if key_pressed == 'r':
+                self.direction = 'r'
+                self.x_coord += 1
+            elif key_pressed == 'l':
+                self.direction = 'l'
+                self.x_coord -= 1
+            else:
+                self.y_coord += 1
+
+        elif self.direction == 'r':
+
+            if key_pressed == 'u':
+                self.direction = 'u'
+                self.y_coord -= 1
+            elif key_pressed == 'd':
+                self.direction = 'd'
+                self.y_coord += 1
+            else:
+                self.x_coord += 1
+
+        else:
+
+            if key_pressed == 'u':
+                self.direction = 'u'
+                self.y_coord -= 1
+            elif key_pressed == 'd':
+                self.direction = 'd'
+                self.y_coord += 1
+            else:
+                self.x_coord -= 1
 
     def get_next_snake(self):
         """
@@ -60,3 +106,22 @@ class Snake:
          >>> snake2.y_coord
          55
         """
+        if self.direction == 'u':
+            x = self.x_coord
+            y = self.y_coord - 20
+            direction = self.direction
+        elif self.direction == 'd':
+            x = self.x_coord
+            y = self.y_coord + 20
+            direction = self.direction
+        elif self.direction == 'r':
+            x = self.x_coord + 20
+            y = self.y_coord
+            direction = self.direction
+        else:
+            x = self.x_coord - 20
+            y = self.y_coord
+            direction = self.direction
+
+        return Snake(x, y, direction)
+
