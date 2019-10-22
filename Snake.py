@@ -33,12 +33,12 @@ class Snake:
         >>> snake.direction
         'd'
         >>> snake.y_coord
-        74
+        76
         >>> snake.move('u')
         >>> snake.direction
         'd'
         >>> snake.y_coord
-        73
+        77
         """
 
 
