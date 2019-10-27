@@ -10,7 +10,11 @@ class Food:
                 level = The difficulty level of the game. Initial level is 1
     """
     def __init__(self):
-        pass
+        self.x = []
+        self.y = []
+        self.quantity = 0
+        self.eaten = 0
+        self.level = 1
 
     def generate_food(self):
         """
@@ -29,7 +33,11 @@ class Food:
         >>> food.quantity
         3
         """
-
+        
+        while self.quantity < self.level: #Generates food randomly as per the difficulty level specifications
+            self.x.append(random.randint(0,800))
+            self.y.append(random.randint(0,600))
+            self.quantity += 1
 
     def get_eaten(self, index):
         """
@@ -49,6 +57,13 @@ class Food:
         >>> len(food.x)
         1
         """
+        del self.x[index]
+        del self.y[index]
+        self.quantity -= 1
+        self.eaten += 1
+
+        if self.quantity < self.level: #Ensures that quantity of food in-game doesn't dip below difficulty level
+            self.generate_food()
 
     def set_level(self):
         """
@@ -56,4 +71,6 @@ class Food:
         eaten.
         :return: None
         """
-
+        
+        self.level += self.eaten * 0.25 #Increases difficulty level by 1 for every 4 food eaten
+        self.eaten = 0
